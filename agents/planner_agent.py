@@ -82,12 +82,13 @@ All steps are executed in the same terminal session; do NOT open a new terminal.
 - expected_output should describe the expected terminal output realistically.
 - expected_input should be the exact command to run.
 - Make steps sequential and atomic; each step must be independently executable.
-- Assume the person or LLM will validate the output; write validation rules clearly and objectively.
+- Assume the person or LLM will validate the output; write validation rules clearly and objectively. 
+- When planing assume that this linux system have mmost of the lib preinstalled, so dont want to install in the tool in here 
 
 User Request: "{user_request}"
 
 Return your output as a JSON object with this format:
-{{
+{{ 
 "request": "<original user request>",
 "steps": [
     {{

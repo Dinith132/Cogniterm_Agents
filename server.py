@@ -12,7 +12,10 @@ async def websocket_endpoint(websocket: WebSocket):
     await websocket.accept()
 
     # Create LLM + orchestrator per client
-    llm = LLMManager(api_key="AIzaSyCO590GfHqyGtSEKaCYtHSA4HhR0G-S12M")
+
+   
+    llm = LLMManager(api_key="Gemini API")
+
     
     orchestrator = MultiAgentOrchestrator(llm, websocket=websocket)
 
@@ -30,7 +33,7 @@ async def websocket_endpoint(websocket: WebSocket):
             summary = await orchestrator.execute_request(request_text)
 
             # Send final report to this client
-            await websocket.send_text(json.dumps({"final_report": summary}))
+            await websocket.send_text(json.dumps({"__END__":"__END__" }))
 
     except Exception as e:
         print(f"WebSocket error: {e}")

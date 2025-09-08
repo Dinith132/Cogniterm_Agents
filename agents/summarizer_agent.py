@@ -68,8 +68,25 @@ class SummarizerAgent(BaseAgent):
             for step in planned_steps
         )
         
+#         prompt = f"""
+# You are an AI assistant. The user requested: "{original_request}".
+
+# The workflow had the following steps and results:
+# {steps_str}
+
+# Instructions:
+# - Summarize each step and its outcome concisely.
+# - Highlight key results.
+# - Identify any warnings or errors.
+# - Determine the final outcome (success, partial, or failure).
+# - Return output strictly as a JSON object with the keys: original_request, steps_completed, key_results, final_outcome, warnings.
+# """
+        
+
         prompt = f"""
-You are an AI assistant. The user requested: "{original_request}".
+You are an AI assistant specialized in summarizing workflows. 
+
+The user requested: "{original_request}".
 
 The workflow had the following steps and results:
 {steps_str}
@@ -78,9 +95,24 @@ Instructions:
 - Summarize each step and its outcome concisely.
 - Highlight key results.
 - Identify any warnings or errors.
-- Determine the final outcome (success, partial, or failure).
-- Return output strictly as a JSON object with the keys: original_request, steps_completed, key_results, final_outcome, warnings.
-"""
+- Determine the final outcome: "success", "partial", or "failure".
+- Return the output strictly as a JSON object with the following keys:
+
+    {{
+        "original_request": "<copy of the original request>",
+        "steps_completed": [
+            {{
+                "step_description": "<description of step>",
+                "outcome": "<result of step>"
+            }},
+            ...
+        ],
+        "key_results": ["<list of key results>"],
+        "total_summary": "<concise summary including all key_results, the final_outcome, and any warnings/errors>",
+        "final_outcome": "<success | partial | failure>",
+        "warnings": ["<list of warnings or errors, empty if none>"]
+    }}"""
+
         # Call LLMManager
         llm_response_text = self.llm_manager.generate_text(prompt)
         
@@ -93,6 +125,7 @@ Instructions:
                 "original_request": original_request,
                 "steps_completed": planned_steps,
                 "key_results": "LLM summary failed",
+                "total_summary":"Failed",
                 "final_outcome": "Unknown",
                 "warnings": []
             }
