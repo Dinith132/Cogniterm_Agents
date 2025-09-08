@@ -12,8 +12,6 @@ async def websocket_endpoint(websocket: WebSocket):
     await websocket.accept()
 
     # Create LLM + orchestrator per client
-
-   
     llm = LLMManager(api_key="Gemini API")
 
     
