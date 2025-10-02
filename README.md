@@ -61,14 +61,6 @@ You can also connect to the WebSocket endpoint using:
 wscat -c ws://13.53.125.55/ws
 ```
 
-
-## Safety Features
-
-- Never auto-executes system or network code
-- Only generates code for user to run manually
-- Validates every step before moving forward
-- Never skips debugging if errors occur
-
 ## Example
 
 For the request "scan my local network for Android devices", the system:
