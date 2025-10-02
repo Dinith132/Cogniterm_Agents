@@ -49,6 +49,13 @@ result = orchestrator.execute_request("scan my local network for Android devices
 print(result)
 ```
 
+## Hosted Backend
+
+The backend of this system is hosted on AWS and can be accessed at:
+
+[http://13.53.125.55](http://13.53.125.55)
+
+
 ## Safety Features
 
 - Never auto-executes system or network code
