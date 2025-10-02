@@ -55,6 +55,12 @@ The backend of this system is hosted on AWS and can be accessed at:
 
 [http://13.53.125.55](http://13.53.125.55)
 
+You can also connect to the WebSocket endpoint using:
+
+```bash
+wscat -c ws://13.53.125.55/ws
+```
+
 
 ## Safety Features
 
